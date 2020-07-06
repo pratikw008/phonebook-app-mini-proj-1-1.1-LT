@@ -27,7 +27,8 @@ public class ContactServiceImpl implements IContactService {
 		ContactEntity contactEnt = Optional.ofNullable(contact)
 						.filter(cnt-> !cnt.getContactName().isEmpty() && !cnt.getContactEmail().isEmpty() && cnt.getContactNumber() != null)
 						.map(ContactServiceImpl::convertContactToContactEntity)
-						.orElseThrow(()-> new ContactNotFoundException("Plz Provide Contact"));
+						.get();
+						//.orElseThrow(()-> new ContactNotFoundException("Plz Provide Contact"));
 		ContactEntity savedInDb = contactRepo.save(contactEnt);
 		return Optional.ofNullable(savedInDb)
 					   .map(ContactServiceImpl::convertContactEntityToContact)
@@ -49,7 +50,10 @@ public class ContactServiceImpl implements IContactService {
 						  .map(ContactServiceImpl::convertContactEntityToContact)
 						  .orElseThrow(()-> new ContactNotFoundException("Contact Not Found"));
 	}
-
+	
+	/**
+	 * Hard Delete
+	 */
 	@Override
 	public boolean deleteContact(Integer id) {
 		if(contactRepo.existsById(id)) {

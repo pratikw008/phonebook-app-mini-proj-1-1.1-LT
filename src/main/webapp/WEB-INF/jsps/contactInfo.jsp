@@ -8,16 +8,21 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Contact Info</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="js/jquery-3.5.1.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/form-validation.js"></script>
 </head>
 <body>
-	<div align="center">
+	<div class="container" align="center">
 		<h1>
 			<b>Contact Info</b>
 		</h1>
-		<spring:form action="/register" method="post" modelAttribute="contact">
+		<spring:form action="/register" method="post" modelAttribute="contact"
+			id="contactRegistration">
 			<table>
 				<tr>
-					<spring:hidden path="contactId"/>
+					<spring:hidden path="contactId" />
 					<td><b><spring:label path="contactName">Name:</spring:label></b></td>
 					<td><spring:input path="contactName" /></td>
 				</tr>
@@ -31,19 +36,21 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="Submit"></td>
+					<td><button type="submit">Submit</button></td>
 				</tr>
 				<c:choose>
 					<c:when test="${saveSuccess == true}">
 						<tr>
 							<td></td>
-							<td><b><font color="green"><c:out value="Contact Saved Successfully" /></font></b></td>
+							<td><b><font color="green"><c:out
+											value="Contact Saved Successfully" /></font></b></td>
 						</tr>
 					</c:when>
 					<c:when test="${updateSuccess == true}">
 						<tr>
 							<td></td>
-							<td><b><font color="green"><c:out value="Contact Updated Successfully" /></font></b></td>
+							<td><b><font color="green"><c:out
+											value="Contact Updated Successfully" /></font></b></td>
 						</tr>
 					</c:when>
 				</c:choose>
